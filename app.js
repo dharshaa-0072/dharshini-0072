@@ -1,22 +1,21 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const authRoutes = require('./routes/auth');
-const projectRoutes = require('./backend/projects');
-const aiRoutes = require('./routes/ai');
-const dbConfig = require('./config/db');
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from '/components/Navbar';
+import Home from '/pages/Home';
+import Project from '/pages/Project';
 
-const app = express();
-app.use(bodyParser.json());
+function App() {
+    return (
+        <Router>
+            <div>
+                <Navbar />
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/project/:id" component={Project} />
+                </Switch>
+            </div>
+        </Router>
+    );
+}
 
-mongoose.connect(dbConfig.url, { useNewUrlParser: true, useUnifiedTopology: true });
-
-app.use('/api/auth', authRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/ai', aiRoutes);
-
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
-});
-
-
+export default App;
