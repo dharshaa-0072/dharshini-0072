@@ -1,0 +1,1 @@
+// Implement functions to integrate with GitHub Copilot and Gemini 2.0 Flash
