@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const { createProject, getProjects } = require('../controllers/projectController');
 
-const ProjectSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-});
+const router = express.Router();
 
-module.exports = mongoose.model('Project', ProjectSchema);
+router.post('/create', createProject);
+router.get('/', getProjects);
+
+module.exports = router;
